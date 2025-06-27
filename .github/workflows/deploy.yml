@@ -1,0 +1,21 @@
+name: Deploy Menu Website
+
+on:
+  push:
+    branches:
+      - main  # 当 main 分支有推送时触发部署
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest  # 使用 Ubuntu 环境
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4  # 拉取仓库代码
+        
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3  # 使用第三方 action 部署到 Pages
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}  # GitHub 自动生成的令牌
+          publish_dir: .  # 发布整个仓库内容
+          publish_branch: gh-pages  # 部署到 gh-pages 分支
